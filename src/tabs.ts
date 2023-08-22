@@ -26,29 +26,31 @@ export class StudsTabs extends LitElement {
     }
   `;
 
-  constructor() {
-    super();
+  private _tabs: Element[] = [];
+  private _panels: Element[] = [];
+
+  firstUpdated() {
     this._tabs = Array.from(this.querySelectorAll('[slot=tab]'));
     this._panels = Array.from(this.querySelectorAll('[slot=panel]'));
     this.selectTab(0);
   }
 
-  selectTab(tabIndex) {
+  selectTab(tabIndex: number): void {
     this._tabs.forEach((tab) => tab.removeAttribute('selected'));
     this._tabs[tabIndex].setAttribute('selected', '');
     this._panels.forEach((panel) => panel.removeAttribute('selected'));
     this._panels[tabIndex].setAttribute('selected', '');
   }
 
-  handleSelect(e) {
-    const index = this._tabs.indexOf(e.target);
+  handleSelect(e: Event): void {
+    const index = this._tabs.indexOf(e.target as Element);
     this.selectTab(index);
   }
 
   render() {
     return html`
       <nav>
-        <slot name="tab" @click=${(e) => this.handleSelect(e)}></slot>
+        <slot name="tab" @click=${(e: Event) => this.handleSelect(e)}></slot>
       </nav>
       <slot name="panel"></slot>
     `;
