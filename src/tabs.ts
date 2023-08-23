@@ -2,16 +2,27 @@ import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import style from './tabs.scss?inline';
 
+export interface TabProps {
+  selectedIndex?: number;
+  tabDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+  variant: 'line' | 'contained';
+}
+
 @customElement('studs-tabs')
 export class StudsTabs extends LitElement {
   static styles = unsafeCSS(style);
   private _tabs: Element[] = [];
   private _panels: Element[] = [];
 
+  @property({ type: Number }) selectedIndex?: TabProps["selectedIndex"];
+  @property({ type: String }) tabDirection?: TabProps["tabDirection"];
+  @property({ type: String }) variant?: TabProps["variant"];
+
+
   firstUpdated() {
     this._tabs = Array.from(this.querySelectorAll('[slot=tab]'));
     this._panels = Array.from(this.querySelectorAll('[slot=panel]'));
-    this.selectTab(0);
+    this.selectTab(this.selectedIndex || 0);
   }
 
   selectTab(tabIndex: number): void {
@@ -36,7 +47,7 @@ export class StudsTabs extends LitElement {
 
   render() {
     return html`
-      <nav>
+      <nav style="flex-direction: ${this.tabDirection || 'row'}">
         <slot name="tab" @click=${this.handleSelect}></slot>
       </nav>
       <slot name="panel"></slot>

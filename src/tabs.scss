@@ -2,15 +2,14 @@ nav {
   display: flex;
 }
 nav > ::slotted([slot="tab"]) {
-  padding: 1rem 2rem;
+  
   flex: 1 1 auto;
-  color: var(--color-darkGrey);
   text-align: center;
   border: none;
   background-color: transparent;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   outline: none;
   border-bottom: 2px solid #ccc;
   color: #555;
