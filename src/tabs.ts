@@ -52,20 +52,20 @@ export class StudsTabs extends LitElement {
   }
 
   render() {
-    const classes = {
-      tabs: true,
-      [`-${this.variant}`]: !!this.variant,
-      [`${this.tabDirection}`]: !!this.tabDirection,
-    };
-
-    const tabDirectionClasses = {
+    const wrapperClasses = {
       'tab-direction-row': this.tabDirection === 'row',
       'tab-direction-column': this.tabDirection === 'column' 
     };
 
+    const navClasses = {
+      tabs: true,
+      [`-${this.variant}`]: !!this.variant,
+      [`${this.tabDirection}`]: !!this.tabDirection,
+    };
+    
     return html`
-      <div class=${classMap(tabDirectionClasses)}>
-        <nav class=${classMap(classes)}>
+      <div class=${classMap(wrapperClasses)}>
+        <nav class=${classMap(navClasses)}>
           <slot name="tab" @click=${this.handleSelect} ?disabled="${this.disabled}"></slot>
         </nav>
         <slot name="panel"></slot>

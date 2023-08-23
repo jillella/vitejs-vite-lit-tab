@@ -25,7 +25,6 @@ nav > ::slotted([slot="tab"][selected]) {
 }
 nav > ::slotted([slot="tab"][disabled]) {
   opacity: 0.5;
-  // pointer-events: none;
   cursor: not-allowed;
 }
 
@@ -47,4 +46,23 @@ nav > ::slotted([slot="tab"][disabled]) {
   nav > ::slotted([slot="tab"][selected]) {
     border-color: #ff5308;
   }
+}
+
+.tabs.-contained {
+
+  ::slotted([slot="tab"]) {
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    background: #f8f8f8;
+  }
+
+  ::slotted([slot="tab"][selected]) {
+    background: #fff;
+    border-bottom-color: #fff; 
+  }
+
+  ::slotted([slot="tab"]:not([selected]):hover) {
+    background: #f0f0f0;
+  }
+
 }
