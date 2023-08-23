@@ -13,9 +13,18 @@ export class StudsTabs extends LitElement {
       color: var(--color-darkGrey);
       border-bottom: 2px solid lightgrey;
       text-align: center;
+      border: none;
+      background-color: transparent;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      outline: none;
+      border-bottom: 2px solid #ccc;
+      color: #555;
+      transition: 0.3s;
     }
     nav > ::slotted([slot="tab"][selected]) {
-      border-color: black;
+      border-color: #ff5308;
     }
     ::slotted([slot="panel"]) {
       display: none;
