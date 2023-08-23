@@ -1,10 +1,15 @@
 nav {
   display: flex;
 }
+nav.row {
+  flex-direction: row;
+}
+nav.column {
+  flex-direction: column;
+}
 nav > ::slotted([slot="tab"]) {
-  
   flex: 1 1 auto;
-  text-align: center;
+  text-align: start;
   border: none;
   background-color: transparent;
   padding: 0.625rem 1.25rem;
@@ -18,9 +23,28 @@ nav > ::slotted([slot="tab"]) {
 nav > ::slotted([slot="tab"][selected]) {
   border-color: #ff5308;
 }
+nav > ::slotted([slot="tab"][disabled]) {
+  opacity: 0.5;
+  // pointer-events: none;
+  cursor: not-allowed;
+}
+
 ::slotted([slot="panel"]) {
   display: none;
+  padding: 0.625rem 1.25rem;
 }
 ::slotted([slot="panel"][selected]) {
   display: block;
+}
+
+.tab-direction-column {
+  display: flex;
+  flex-direction: row;
+  nav > ::slotted([slot="tab"]) {
+    border-bottom: none;
+    border-right: 2px solid #ccc;
+  }
+  nav > ::slotted([slot="tab"][selected]) {
+    border-color: #ff5308;
+  }
 }

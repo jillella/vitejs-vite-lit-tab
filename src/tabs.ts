@@ -1,11 +1,13 @@
 import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from "lit/directives/class-map.js";
 import style from './tabs.scss?inline';
 
 export interface TabProps {
   selectedIndex?: number;
-  tabDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+  tabDirection?: 'row' | 'column';
   variant: 'line' | 'contained';
+  disabled?: boolean;
 }
 
 @customElement('studs-tabs')
@@ -17,6 +19,7 @@ export class StudsTabs extends LitElement {
   @property({ type: Number }) selectedIndex?: TabProps["selectedIndex"];
   @property({ type: String }) tabDirection?: TabProps["tabDirection"];
   @property({ type: String }) variant?: TabProps["variant"];
+  @property({ type: Boolean }) disabled?: TabProps["disabled"];
 
 
   firstUpdated() {
@@ -33,6 +36,8 @@ export class StudsTabs extends LitElement {
   }
 
   toggleSelected(element: Element, isSelected: boolean): void {
+    if (this.disabled) return;
+
     if (isSelected) {
       element.setAttribute('selected', '');
     } else {
@@ -41,16 +46,30 @@ export class StudsTabs extends LitElement {
   }
 
   handleSelect = (e: Event): void => {
+    if (this.disabled) return;
     const index = this._tabs.indexOf(e.target as Element);
     this.selectTab(index);
   }
 
   render() {
+    const classes = {
+      tabs: true,
+      [`-${this.variant}`]: !!this.variant,
+      [`${this.tabDirection}`]: !!this.tabDirection,
+    };
+
+    const tabDirectionClasses = {
+      'tab-direction-row': this.tabDirection === 'row',
+      'tab-direction-column': this.tabDirection === 'column' 
+    };
+
     return html`
-      <nav style="flex-direction: ${this.tabDirection || 'row'}">
-        <slot name="tab" @click=${this.handleSelect}></slot>
-      </nav>
-      <slot name="panel"></slot>
+      <div class=${classMap(tabDirectionClasses)}>
+        <nav class=${classMap(classes)}>
+          <slot name="tab" @click=${this.handleSelect} ?disabled="${this.disabled}"></slot>
+        </nav>
+        <slot name="panel"></slot>
+      </div>
     `;
   }
 }
