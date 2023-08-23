@@ -22,7 +22,6 @@ nav > ::slotted([slot="tab"][selected]) {
 ::slotted([slot="panel"]) {
   display: none;
 }
-
 ::slotted([slot="panel"][selected]) {
   display: block;
 }

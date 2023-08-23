@@ -1,39 +1,10 @@
-import { css, html, LitElement } from 'lit';
+import { LitElement, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import style from './tabs.scss?inline';
 
 @customElement('studs-tabs')
 export class StudsTabs extends LitElement {
-  static styles = css`
-    nav {
-      display: flex;
-    }
-    nav > ::slotted([slot="tab"]) {
-      padding: 1rem 2rem;
-      flex: 1 1 auto;
-      color: var(--color-darkGrey);
-      text-align: center;
-      border: none;
-      background-color: transparent;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 16px;
-      outline: none;
-      border-bottom: 2px solid #ccc;
-      color: #555;
-      transition: 0.3s;
-    }
-    nav > ::slotted([slot="tab"][selected]) {
-      border-color: #ff5308;
-    }
-    ::slotted([slot="panel"]) {
-      display: none;
-    }
-
-    ::slotted([slot="panel"][selected]) {
-      display: block;
-    }
-  `;
-
+  static styles = unsafeCSS(style);
   private _tabs: Element[] = [];
   private _panels: Element[] = [];
 
@@ -44,13 +15,21 @@ export class StudsTabs extends LitElement {
   }
 
   selectTab(tabIndex: number): void {
-    this._tabs.forEach((tab) => tab.removeAttribute('selected'));
-    this._tabs[tabIndex].setAttribute('selected', '');
-    this._panels.forEach((panel) => panel.removeAttribute('selected'));
-    this._panels[tabIndex].setAttribute('selected', '');
+    this._tabs.forEach((tab) => this.toggleSelected(tab, false));
+    this._panels.forEach((panel) => this.toggleSelected(panel, false));
+    this.toggleSelected(this._tabs[tabIndex], true);
+    this.toggleSelected(this._panels[tabIndex], true);
   }
 
-  handleSelect(e: Event): void {
+  toggleSelected(element: Element, isSelected: boolean): void {
+    if (isSelected) {
+      element.setAttribute('selected', '');
+    } else {
+      element.removeAttribute('selected');
+    }
+  }
+
+  handleSelect = (e: Event): void => {
     const index = this._tabs.indexOf(e.target as Element);
     this.selectTab(index);
   }
@@ -58,7 +37,7 @@ export class StudsTabs extends LitElement {
   render() {
     return html`
       <nav>
-        <slot name="tab" @click=${(e: Event) => this.handleSelect(e)}></slot>
+        <slot name="tab" @click=${this.handleSelect}></slot>
       </nav>
       <slot name="panel"></slot>
     `;
