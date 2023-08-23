@@ -11,7 +11,6 @@ export class StudsTabs extends LitElement {
       padding: 1rem 2rem;
       flex: 1 1 auto;
       color: var(--color-darkGrey);
-      border-bottom: 2px solid lightgrey;
       text-align: center;
       border: none;
       background-color: transparent;
