@@ -1,6 +1,7 @@
 .tabsComponent {
   .tabs {
     display: flex;
+    // width:fit-content;
 
     &.row {
       flex-direction: row;
@@ -14,6 +15,9 @@
       ::slotted([slot="tab"]) {
         border: 1px solid #ccc;
         border-radius: 4px;
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
         background: #f8f8f8;
       }
       ::slotted([slot="tab"][selected]) {
@@ -59,7 +63,7 @@
     display: block;
   }
 
-  .tab-direction-column {
+  &.tab-direction-column {
     display: flex;
     flex-direction: row;
 

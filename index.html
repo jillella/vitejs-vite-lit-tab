@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
-    <!-- <link rel="stylesheet" href="./src/index.css" /> -->
+    <link rel="stylesheet" href="./src/index.css" />
     <script type="module" src="/src/tabs.ts"></script>
   </head>
   <body>
@@ -19,8 +19,7 @@
       <section slot="panel">Content for tab 3</section>
     </studs-tabs>
 
-    <br /><br /><br /><br />
-    <h2>Tabs with Disabled</h2>
+    <h2>Tabs with disabled</h2>
     <studs-tabs>
       <button slot="tab">Tab 1</button>
       <section slot="panel">Content for tab 1</section>
@@ -30,7 +29,6 @@
       <section slot="panel">Content for tab 3</section>
     </studs-tabs>
 
-    <br /><br /><br /><br />
     <h2>Tabs with contained</h2>
     <studs-tabs tabDirection="row" variant="contained">
       <button slot="tab">Tab 1</button>
@@ -40,8 +38,17 @@
       <button slot="tab">Tab3</button>
       <section slot="panel">Content for tab 3</section>
     </studs-tabs>
+
+    <h2>Tabs with direction column</h2>
+    <studs-tabs tabDirection="column">
+      <button slot="tab">Tab 1</button>
+      <section slot="panel">Content for tab 1</section>
+      <button slot="tab">Tab 2</button>
+      <section slot="panel">Content for tab 2</section>
+      <button slot="tab">Tab3</button>
+      <section slot="panel">Content for tab 3</section>
+    </studs-tabs>
     
-    <br /><br /><br /><br />
     <h2>Tabs with long text</h2>
     <studs-tabs>
       <button slot="tab">Bridging and Bracing Connectors</button>
