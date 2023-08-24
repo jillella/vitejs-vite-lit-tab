@@ -1,68 +1,76 @@
-nav {
-  display: flex;
-}
-nav.row {
-  flex-direction: row;
-}
-nav.column {
-  flex-direction: column;
-}
-nav > ::slotted([slot="tab"]) {
-  flex: 1 1 auto;
-  text-align: start;
-  border: none;
-  background-color: transparent;
-  padding: 0.625rem 1.25rem;
-  cursor: pointer;
-  font-size: 1rem;
-  outline: none;
-  border-bottom: 2px solid #ccc;
-  color: #555;
-  transition: 0.3s;
-}
-nav > ::slotted([slot="tab"][selected]) {
-  border-color: #ff5308;
-}
-nav > ::slotted([slot="tab"][disabled]) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.tabsComponent {
+  .tabs {
+    display: flex;
 
-::slotted([slot="panel"]) {
-  display: none;
-  padding: 0.625rem 1.25rem;
-}
-::slotted([slot="panel"][selected]) {
-  display: block;
-}
+    &.row {
+      flex-direction: row;
+    }
 
-.tab-direction-column {
-  display: flex;
-  flex-direction: row;
-  nav > ::slotted([slot="tab"]) {
-    border-bottom: none;
-    border-right: 2px solid #ccc;
+    &.column {
+      flex-direction: column;
+    }
+
+    &.-contained {
+      ::slotted([slot="tab"]) {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #f8f8f8;
+      }
+      ::slotted([slot="tab"][selected]) {
+        background: #fff;
+        border-bottom-color: #fff;
+      }
+      ::slotted([slot="tab"]:not([selected]):hover) {
+        background: #f0f0f0;
+      }
+    }
   }
-  nav > ::slotted([slot="tab"][selected]) {
-    border-color: #ff5308;
-  }
-}
+  .tabs > {
+    ::slotted([slot="tab"]) {
+      flex: 1 1 auto;
+      text-align: start;
+      border: none;
+      background-color: transparent;
+      padding: 0.625rem 1.25rem;
+      cursor: pointer;
+      font-size: 1rem;
+      outline: none;
+      border-bottom: 2px solid #ccc;
+      color: #555;
+      transition: 0.3s;
+    }
 
-.tabs.-contained {
+    ::slotted([slot="tab"][selected]) {
+      border-color: #ff5308;
+    }
 
-  ::slotted([slot="tab"]) {
-    border: 1px solid #ccc; 
-    border-radius: 4px;
-    background: #f8f8f8;
+    ::slotted([slot="tab"][disabled]) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
-  ::slotted([slot="tab"][selected]) {
-    background: #fff;
-    border-bottom-color: #fff; 
+  ::slotted([slot="panel"]) {
+    display: none;
+    padding: 0.625rem 1.25rem;
+  }
+  
+  ::slotted([slot="panel"][selected]) {
+    display: block;
   }
 
-  ::slotted([slot="tab"]:not([selected]):hover) {
-    background: #f0f0f0;
-  }
+  .tab-direction-column {
+    display: flex;
+    flex-direction: row;
 
+    .tabs > {
+      ::slotted([slot="tab"]) {
+        border-bottom: none;
+        border-right: 2px solid #ccc;
+      }
+      ::slotted([slot="tab"][selected]) {
+        border-color: #ff5308;
+      }
+    }
+  }
 }
